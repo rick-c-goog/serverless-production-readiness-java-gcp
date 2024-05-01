@@ -1,0 +1,33 @@
+# replace "veer-s3c-mvn2" in the three targets below with your actual project(s)
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: security-demo-pipeline
+description: Security-focused CI/CD pipeline on GCP
+serialPipeline:
+ stages:
+ - targetId: test-sec
+   profiles:
+   - test
+ - targetId: prod-sec
+   profiles:
+   - prod
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: test-sec
+description: test cluster
+gke:
+  cluster: projects/rick-devops-01/locations/us-central1-a/clusters/test-sec
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: prod-sec
+description: prod cluster
+requireApproval: true
+gke:
+  cluster: projects/rick-devops-01/locations/us-central1-a/clusters/prod-sec
