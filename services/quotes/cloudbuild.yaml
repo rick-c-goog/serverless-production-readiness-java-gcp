@@ -26,7 +26,6 @@ steps:
   - name: 'maven-repository'
     path: '/root/.m2'
   args: ["verify"]
-
   # build service image
 - id: 'build-application'
   name: maven:3.9.5-eclipse-temurin-21
